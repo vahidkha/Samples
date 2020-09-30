@@ -32,6 +32,25 @@ def data_gen (files):
     X.append(img)
     y.append(lb)
   return np.array(X), np.array(y)
+
+def gen_npy (X, y):
+  # split 80 10 10
+  X_train, X_test, y_train, y_test = train_test_split (X, y, test_size=0.2, random_state=42) 
+  X_test, X_valid, y_test, y_valid = train_test_split (X_test, y_test, test_size=0.5, random_state=42) 
+
+  folder = "npy_data"
+  if not os.path.exists(folder):
+    os.makedirs(folder)
+
+  # save to npy file
+  np.save(os.path.join(folder, "X_train.npy"), X_train)
+  np.save(os.path.join(folder, "X_test.npy"), X_test)
+  np.save(os.path.join(folder, "X_valid.npy"), X_valid)
+  np.save(os.path.join(folder, "y_train.npy"), y_train)
+  np.save(os.path.join(folder, "y_test.npy"), y_test)
+  np.save(os.path.join(folder, "y_valid.npy"), y_valid)
+
+  print ("{} train and {} test/valid was generated!".format(len(X_train), len(X_test)))
   
   
   import tensorflow as tf
