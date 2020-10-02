@@ -180,3 +180,20 @@ def new_model():
 
   myModel.compile(loss='mse', optimizer=Adam(lr=1e-4), metrics = ['accuracy'])
   hist = myModel.fit(X_train, y_train, epochs=10, batch_size = 32, validation_data = (X_valid, y_valid), callbacks=[model_checkpoint])
+
+  
+  from sklearn import linear_model
+from sklearn.metrics import mean_squared_error, r2_score
+
+def validation (X_test, y_test, weights, name):
+    model_cls = cls_testing_model()
+    model_cls.load_weights(weights)
+    #model_cls.summary()
+    X_test = preprocess_input(X_test)
+    y_pred = model_cls.predict(X_test)    r2 = r2_score(y_test, y_pred)
+    regr = linear_model.LinearRegression()    y_test_p = y_test.reshape(-1, 1)
+    regr.fit(y_test_p, y_pred)
+    pred_y_pred = regr.predict(y_test_p)    plt.scatter(y_test, y_pred,  color='darkcyan', alpha = 0.6)
+    plt.plot(y_test_p, pred_y_pred, color='olive', linewidth=3)
+    plt.savefig(name+'.png')
+    plt.close()    return r2, y_test, y_pred
