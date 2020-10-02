@@ -197,3 +197,17 @@ def validation (X_test, y_test, weights, name):
     plt.plot(y_test_p, pred_y_pred, color='olive', linewidth=3)
     plt.savefig(name+'.png')
     plt.close()    return r2, y_test, y_pred
+
+  def LSTM_model():
+    input_shape = (1164, 1)
+    input = Input(shape=input_shape)
+
+    x = LSTM(128, return_sequences=True)(input)
+    x = Dropout(0.5)(x)
+    x = LSTM(128, return_sequences=True)(x)
+    x = Dropout(0.5)(x)
+
+    output = Dense(1, activation='linear')(x)
+    model = Model(inputs=input, outputs=output)
+    return model
+  
