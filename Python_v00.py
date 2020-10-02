@@ -128,6 +128,13 @@ X, y = data_gen (files)
 print (X.shape, y.shape)
 gen_npy(X, y)
 
+from tensorflow.keras.layers import Conv1D, MaxPool1D, ReLU, Input, BatchNormalization, MaxPool1D, Dense, Flatten
+from tensorflow.keras import Model
+import numpy as np
+from tensorflow.keras.optimizers import Adam
+
+
+
 def new_model():
     input_shape = (1164, 1)
     input = Input(shape=input_shape)
@@ -139,13 +146,13 @@ def new_model():
     x = MaxPool1D(pool_size=2, name='pool1')(x)
 
     # Conv block 2
-    x = Conv1D(128, 3, padding='same', name='conv2')(input)
-    x = BatchNormalization(name='bn1')(x)
+    x = Conv1D(128, 3, padding='same', name='conv2')(x)
+    x = BatchNormalization(name='bn2')(x)
     x = ReLU()(x)
     x = MaxPool1D(pool_size=2, name='pool2')(x)
 
     # Conv block 3
-    x = Conv1D(128, 3, padding='same', name='conv3')(input)
+    x = Conv1D(128, 3, padding='same', name='conv3')(x)
     x = BatchNormalization(name='bn1')(x)
     x = ReLU()(x)
     x = MaxPool1D(pool_size=2, name='pool3')(x)
