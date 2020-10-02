@@ -161,3 +161,22 @@ def new_model():
     output = Dense(1, activation='linear', name='output')(x)
     model = Model(inputs=input, outputs=output)
     return model
+  
+  def train ():
+
+  myModel = new_model()
+  myModel.summary()
+
+  X_train = np.ones((20, 1164))
+  y_train = np.array([1]*20)
+
+
+  X_valid = np.ones((20, 1164))
+  y_valid = np.array([1]*20)
+
+  myModel.fit
+
+  model_checkpoint = ModelCheckpoint("weight.h5", monitor='val_loss',verbose=2, save_best_only=True)
+
+  myModel.compile(loss='mse', optimizer=Adam(lr=1e-4), metrics = ['accuracy'])
+  hist = myModel.fit(X_train, y_train, epochs=10, batch_size = 32, validation_data = (X_valid, y_valid), callbacks=[model_checkpoint])
