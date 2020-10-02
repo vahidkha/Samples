@@ -127,3 +127,30 @@ files = read_file('/content/drive/My Drive/Vahid/Data/')
 X, y = data_gen (files)
 print (X.shape, y.shape)
 gen_npy(X, y)
+
+def new_model():
+    input_shape = (1164, 1)
+    input = Input(shape=input_shape)
+
+    # Conv block 1
+    x = Conv1D(128, 3, padding='same', name='conv1')(input)
+    x = BatchNormalization(name='bn1')(x)
+    x = ReLU()(x)
+    x = MaxPool1D(pool_size=2, name='pool1')(x)
+
+    # Conv block 2
+    x = Conv1D(128, 3, padding='same', name='conv2')(input)
+    x = BatchNormalization(name='bn1')(x)
+    x = ReLU()(x)
+    x = MaxPool1D(pool_size=2, name='pool2')(x)
+
+    # Conv block 3
+    x = Conv1D(128, 3, padding='same', name='conv3')(input)
+    x = BatchNormalization(name='bn1')(x)
+    x = ReLU()(x)
+    x = MaxPool1D(pool_size=2, name='pool3')(x)
+
+    x = Flatten()(x)
+    output = Dense(1, activation='linear', name='output')(x)
+    model = Model(inputs=input, outputs=output)
+    return model
