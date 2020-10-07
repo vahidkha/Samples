@@ -225,3 +225,14 @@ X_the_boss = np.array([np.moveaxis(np.reshape(x, (291, 4)), 0, 1).flatten() for 
 
 
 print (X_8grouped.shape, X_4grouped.shape, X_the_boss.shape)
+
+def re_arrange (data):
+
+  ord_1 = np.reshape(data, (291, 4))
+
+  ord_1_first_half = ord_1[:145]
+  ord_1_socond_half = ord_1[146:]
+  ord_1_socond_half = ord_1_socond_half[::-1] #reverse the array
+  ord_2 = np.concatenate((ord_1_first_half, ord_1_socond_half), axis = 1)
+
+  return ord_2
