@@ -220,8 +220,8 @@ X_8grouped = np.array([np.moveaxis(re_arrange(x), 0, 1) for x in X_raw])
 # this if for 4 grouping 
 X_4grouped = np.array([np.moveaxis(np.reshape(x, (291, 4)), 0, 1) for x in X_raw])
 
-# this is for your boss
-X_the_boss = np.array([np.moveaxis(np.reshape(x, (291, 4)), 0, 1).flatten() for x in X_raw])
+# this is for 1 grouping
+X_1grouped = np.array([np.moveaxis(np.reshape(x, (291, 4)), 0, 1).flatten() for x in X_raw])
 
 
 print (X_8grouped.shape, X_4grouped.shape, X_the_boss.shape)
