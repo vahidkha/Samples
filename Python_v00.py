@@ -242,11 +242,11 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 
-def gen_file (data):
+def gen_file (file_name, data):
 
-  X = [x for [x,y,val] in data]
-  Y = [y for [x,y,val] in data]
-  val_dict = {"{}:{}".format(x, y):val for [x, y, val] in data}
+  X = [int(x) for [x,y,val] in data]
+  Y = [int(y) for [x,y,val] in data]
+  val_dict = {"{}:{}".format(int(x), int(y)):val for [x, y, val] in data}
 
   n = max(X)-min(X)+1
   m = max(Y)-min(Y)+1
@@ -257,7 +257,10 @@ def gen_file (data):
     for j in range(min(Y), max(Y)+1):
       result[i, j] = val_dict["{}:{}".format(i, j)]
 
-  plt.imshow(result)
-  plt.show()
+  new_name = "vis" + file_name
+
+  plt.pcolormesh(result)
+  plt.savefig(new_name)
+  #plt.show()
 
   return result
