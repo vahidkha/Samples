@@ -255,7 +255,9 @@ def gen_file (file_name, data):
 
   for i in range(min(X), max(X)+1):
     for j in range(min(Y), max(Y)+1):
-      result[i, j] = val_dict["{}:{}".format(i, j)]
+      temp = "{}:{}".format(i, j)
+      if temp in val_dict:
+        result[i, j] = val_dict[temp]
 
   new_name = "vis" + file_name
 
