@@ -236,3 +236,28 @@ def re_arrange (data):
   ord_2 = np.concatenate((ord_1_first_half, ord_1_socond_half), axis = 1)
 
   return ord_2
+
+
+import numpy as np
+import math
+import matplotlib.pyplot as plt
+
+def gen_file (data):
+
+  X = [x for [x,y,val] in data]
+  Y = [y for [x,y,val] in data]
+  val_dict = {"{}:{}".format(x, y):val for [x, y, val] in data}
+
+  n = max(X)-min(X)+1
+  m = max(Y)-min(Y)+1
+  print (val_dict)
+  result = np.zeros((n,m))
+
+  for i in range(min(X), max(X)+1):
+    for j in range(min(Y), max(Y)+1):
+      result[i, j] = val_dict["{}:{}".format(i, j)]
+
+  plt.imshow(result)
+  plt.show()
+
+  return result
